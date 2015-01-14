@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>nb-menu Example</title>
+
+  <meta name="viewport" 
+  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="bower_components/webcomponentsjs/webcomponents.js">
+  </script>
+	<link rel="import" href="bower_components/polymer/polymer.html">
+  <link rel="import" href="components/nb-menu.html">
+
+  <style>
+  html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+  }
+  .container {
+    width: 80%;
+    margin: 50px auto;
+  }
+  @media (min-width: 481px) {
+    #tabs {
+      width: 200px;
+    }
+    .container {
+      width: 400px;
+    }
+  }
+  </style>
+
+</head>
+
+<body unresolved>
+	<nb-menu selectedIndex="2" id="menu"></nb-menu>
+	<br />
+	<br />
+	<br />
+	<a style="background-color:white;cursor:pointer;" onClick="toggle()">Click here to replace the items in the menu</a>
+	<h1>Here is the current JSON of the menu</h1>
+	<textarea cols="100" rows="30" id="json">
+	</textarea>
+	<h1>Here is what will be put into the menu (Try editing this!)</h1>
+	<textarea cols="100" rows="30" id="oldjson">
+	</textarea>
+	<br /><br /><br /><br /><br />
+	<h1> Here is the javascript for this pages</h1>
+	<textarea cols="150" rows="50" id="codetext"></textarea>
+	<script id="code">
+	//The Function that actually switches the menu
+	function toggle(){
+		//save the oldJSON from the menu		
+			oldJSON = document.getElementById('menu').items;
+		//get the new json from the textareao
+			newJSON = toObj(document.getElementById('oldjson').value);
+		//set the menu's items to the newJSON
+			document.getElementById('menu').items = newJSON;
+		//set the current text area text
+			document.getElementById('json').value = toStr(newJSON, true);
+		//set the old text area text
+			document.getElementById('oldjson').value = toStr(oldJSON, true);
+		}
+	var newJSON;
+	var oldJSON;
+	//create the default for the menu
+	newJSON = [
+                {
+                  "id": 1,
+                  "label": "item 1",
+                  "action": "alert('hello from item 1')",
+                  "icon": "arrow-back",
+                  "children": [
+                    {
+                      "id": 11,
+                      "label": "item 1-1",
+                      "action": "console.log('youclicked item 1-1')",
+                      "icon": "assignment-ind",
+                      "children": [
+                        {
+                          "id": 111,
+                          "label": "item 1-1-1",
+                          "action": "console.log('youclicked item 1-1-1')",
+                          "icon": "grade",
+                          "children": [
+                            {
+                              "id": 1111,
+                              "label": "item 1-1-1-1",
+                              "action": "console.log('youclicked item 1-1-1-1')",
+                              "icon": "filter-list"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "label": "item 1-2",
+                      "action": "console.log('youclicked item 1-2')",
+                      "icon": "done-all",
+                      "children": [
+                        {
+                          "id": 121,
+                          "label": "item 1-2-1",
+                          "action": "console.log('youclicked item 1-2-1')",
+                          "icon": "folder"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "label": "item 2",
+                  "action": "console.log('youclicked item 2')",
+                  "icon": "group-work",
+                  "children": [
+                    {
+                      "id": 21,
+                      "label": "item 2-1",
+                      "action": "this.selected = 2",
+                      "icon": "send-money"
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "label": "item 3",
+                  "action": "console.log('youclicked item 3')",
+                  "icon": "settings-backup-restore"
+                },
+                {
+                  "id": 4,
+                  "label": "item 4",
+                  "action": "this.selected = 1",
+                  "icon": "shopping-cart"
+                }
+          ];
+		  //set the menu's items to the default
+	document.getElementById('menu').items = newJSON;
+	//set the text area to the default
+	document.getElementById('json').value = toStr(newJSON, true);
+	
+	//initialize the oldJson to something to toggle between
+	document.getElementById('oldjson').value = toStr([{
+					"id":0,
+					"label":"New Stuff", 
+					"icon": "settings", 
+					"action": "alert('hello')"
+				}], true);
+	
+	
+		
+		
+		
+		
+		
+		/* Util functions for stringifying and parsing only when needed*/
+					function toStr(input, formatted) {
+						formatted = (formatted == undefined) ? false:formatted;
+						if (input !== undefined) {
+							var output;
+							if (typeof input !== 'string') {
+								//input is not a string, check to see if its an object, if it is stringify it
+								//console.log('UserData is not an object');
+								if (typeof input == 'object') {
+									if (formatted){
+										output = JSON.stringify(input, null, 3);
+									}else{
+										output = JSON.stringify(input);
+									}
+									return output;
+								} else {
+									//input is not an object, log an error and return nothing
+									return;
+								}
+							} else {
+								return input;
+							}
+						}
+					}
+					function toObj(input){
+						if (input != 'undefined'){
+							var output;
+							if (typeof input !== 'object'){
+								//input is not an object, check to see if its a string, if it is parse it
+								if (typeof input == 'string'){
+									return JSON.parse(input);
+								}else{
+									//input is not a string, log an error and return false
+									return;
+								}
+							}else{
+								//input is allready an object, return it
+								return input;
+							}
+						}
+					}
+					
+		//set the code text text area to this scripts text
+		document.getElementById('codetext').value = document.getElementById("code").innerHTML;
+	</script>
+	
+	
+	
+	
+	
+	</body>
+
+</html>
