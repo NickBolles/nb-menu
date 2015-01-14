@@ -1,0 +1,129 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../bower_components/core-menu/core-submenu.html">
+<link rel="import" href="../bower_components/core-item/core-item.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<script>
+  PolymerExpressions.prototype.json = function(object) {
+    return JSON.stringify(object);
+  }
+</script>
+ 
+<polymer-element name="nb-menu" >
+	<template>
+    <core-menu selected="{{selectedIndex}}" selectedItem="{{selectedItem}}" on-core-select="{{onSelect}}" on-tap="{{onTap}}">
+      <template repeat="{{items}}" id="test">
+          <template if="{{children}}">          
+            <template if="{{children.length > 0}}">
+              <core-submenu label="{{ label }} submenu" icon="{{icon}}" data-action="{{action}}" data-toggle-drawer="{{toggleDrawer}}">
+                <template ref="test" repeat="{{children}}"></template>
+              </core-submenu> 
+            </template>
+          </template>
+          <template if="{{!children}}">
+            <core-item label="{{ label }} item" icon="{{icon}}" data-action="{{action}}"  data-toggle-drawer="{{toggleDrawer}}">
+            </core-item>
+          </template>
+      </template>  
+    </core-menu>
+  </template>
+  
+  <script>
+    //Register the nb-menu element
+    Polymer('nb-menu',{
+      //Set up the published properties of the element. 
+      //Instead of taking the more correct and "declarative" approach we use the "publish" property so that
+      //we can set "reflect" to true. This means that any of these "published" attributes will be updated
+      //on the elements attributes, whenever they are changed inside of the element
+      publish:{
+        //Declare a pulbished attribute named "selectedItem" with the default value of "null" 
+        //and it will reflect back to the elements attributes
+        selectedItem: {
+            value: null,
+            reflect: true
+        },
+        selectedIndex: {
+            value: null,
+            reflect: true
+        },     
+        items: {
+          value: {},
+          reflect: true
+        }               
+      },
+	  //use the onTap to set the core-drawer-toggle attribute so that the core-drawer-panel will recognize it
+	  //We need to set it on this (nb-menu) because the actual target is inside the shadow dom, and isnt visible to core-drawer-panel
+	  onTap:function onTap(event, details, menu){
+		var currentEle = event.target;
+		var levels = 0;
+		for(var i = 0; i< 1;){
+			var tag = currentEle.tagName;
+			console.log(tag + "  " + currentEle.label);
+			console.log(levels);
+			if (tag == "CORE-MENU" || tag == "NB-MENU"){
+				break;
+			}
+			levels++;
+			currentEle = currentEle.parentElement;
+		}
+		var cutoff = (event.target.tagName == "CORE-ITEM") ? 3:2;
+		if (levels >cutoff){
+			event.currentTarget.style.marginLeft = "-" +((levels-1)*40) + "px";				
+		}else{
+			if (Math.abs(parseInt(event.currentTarget.style.marginLeft)) > 40){
+				event.currentTarget.style.marginLeft = "0px";
+			}
+		}
+			
+		var togglePanel = event.target.dataset.toggleDrawer.toLowerCase();
+		if (togglePanel === "true"){
+			var that = this;
+				that.setAttribute('core-drawer-toggle', '');
+				//we want to remove the attribute after it has served its purpose
+				setTimeout(function(){that.removeAttribute('core-drawer-toggle')},100);
+		}
+      },  
+      //Declare the "onSelect" Event handler
+      onSelect:function onSelect(event, details, menu){
+		
+        //if details.isSelected is true the element is being selected
+        if (details.isSelected){
+						
+          //Set the menu's selectedItem as the element
+          menu.selectedItem = details.item; 
+          
+          //Do the action that is on the element
+          var action = details.item.dataset.action;
+          eval(action);
+          
+          //console.log(" action is " + action);
+          console.log("Selected " + details.item.label);    
+
+		  
+        }
+        //The element is being deselected
+        else{
+          //Do anything that needs to be done when the element is deselected
+          console.log("DeSelected " + details.item.label);
+        }        
+      },
+            
+      //Declare the cunstructor for the element
+      created: function() {
+		this.style.left = "0";
+        //this.selectedItem = null;
+        //this.selectedIndex = -1;
+      },
+            
+      //Declare the callback for when the element is finished initiating
+      ready: function(){
+            var that = this;
+            //setTimeout(function(){that.selectedIndex = 0},1000);
+      }
+            
+     //For More events that can be bound to visit https://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+    });
+    
+  </script>
+ 
+</polymer-element>
