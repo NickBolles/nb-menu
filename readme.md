@@ -24,32 +24,33 @@ It creates a menu based on JSON that you give to it.
 
 ##Published Attributes##
 There are 4 published attributes on &lt;nb-menu&gt;
-1. selectedIndex -- This states the initial selected item. Default is null (polymer default)
-2. selectedItem -- The item that is currently selected. Default is -1 (nothing selected)
-3. items -- The JSON of items to construct the menu from. Default is []
-4  adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Useful for use with the <core-drawer-panel>. Default is true
+- selectedIndex -- This states the initial selected item. Default is null (polymer default)
+- selectedItem -- The item that is currently selected. Default is -1 (nothing selected)
+- items -- The JSON of items to construct the menu from. Default is []
+- adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Useful for use with the <core-drawer-panel>. Default is true
 
 ##Adding Content to the Menu##
 if your &lt;nb-menu&gt; has an id of `menu` like this:
 `<nb-menu id="menu"></nb-menu>`
 you can set the content of it like this
->document.getElementById('menu').items = [
->                                           {
->                                               "label": "item 1",
->                                               "action": "alert('hello from item 1')",
->                                                "icon": "arrow-back",
->						 "toggleDrawer": true
->                                                "children": [
->                                                   {
->                                                       "label": "item 1-1",
->                                                       "action": "console.log('you clicked item 1-1')",
->                                                       "icon": "assignment-ind",
->							"toggleDrawer": true
->                                                   }
->                                                ]
->                                           }
->                                       ]
-
+```JSON
+document.getElementById('menu').items = [
+                                           {
+                                               "label": "item 1",
+                                               "action": "alert('hello from item 1')",
+                                                "icon": "arrow-back",
+						 "toggleDrawer": true
+                                                "children": [
+                                                   {
+                                                       "label": "item 1-1",
+                                                       "action": "console.log('you clicked item 1-1')",
+                                                       "icon": "assignment-ind",
+							"toggleDrawer": true
+                                                   }
+                                                ]
+                                           }
+                                       ]
+```
 The JSON can have 5 properties
 | label | Sets the Text for the button |
 | action | Sets the action for the button. Should be a function or several functions and should only include single quotes, not double |
