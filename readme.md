@@ -3,8 +3,8 @@ A polymer component for creating recursive menus from JSON.
 
 ##To Get Started##
 Install with bower:
-`bower install nb-menu
-<br />`
+`bower install nb-menu`
+<br />
 Import the html file
 <br />
 `<link rel="import" href="bower_components/nb-menu/nb-menu.html">`
