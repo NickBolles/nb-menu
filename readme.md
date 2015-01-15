@@ -1,34 +1,36 @@
-#<NB-Menu>#
+#&lt;NB-Menu&gt;#
 A polymer component for creating recursive menus from JSON.
 
 ##To Get Started##
 Install with bower:
+<br />
 `bower install nb-menu`
 <br />
 Import the html file
 <br />
 `<link rel="import" href="bower_components/nb-menu/nb-menu.html">`
+<br />
 and start using it!
 <br />
 `<nb-menu></nb-menu>`
 <br />
 Look below at *Adding Content to the Menu* for information on how to set the items
 ##Why not use polymers stock [core-menu](https://www.polymer-project.org/docs/elements/core-elements.html#core-menu)?##
-<nb-menu> is smart.
+&lt;nb-menu&gt; is smart.
 It creates a menu based on JSON that you give to it.
-<nb-menu> doesnt just create recursive menus with little effort though...
+&lt;nb-menu&gt; doesnt just create recursive menus with little effort though...
 - It works great with [core-drawer-panel](https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel) (See `toggleDrawer` in "JSON format" below)
 - It automatically scrolls over when the depth of submenus gets to deep. This can be disabled (see `Published Attributes` below)
 
 ##Published Attributes##
-There are 4 published attributes on <nb-menu>
+There are 4 published attributes on &lt;nb-menu&gt;
 1. selectedIndex -- This states the initial selected item. Default is null (polymer default)
 2. selectedItem -- The item that is currently selected. Default is -1 (nothing selected)
 3. items -- The JSON of items to construct the menu from. Default is []
-4  adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Usefull for use with the <core-drawer-panel>. Default is true
+4  adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Useful for use with the <core-drawer-panel>. Default is true
 
 ##Adding Content to the Menu##
-if your <nb-menu> has an id of `menu` like this:
+if your &lt;nb-menu&gt; has an id of `menu` like this:
 `<nb-menu id="menu"></nb-menu>`
 you can set the content of it like this
 >document.getElementById('menu').items = [
