@@ -52,6 +52,8 @@ document.getElementById('menu').items = [
                                        ]
 ```
 The JSON can have 5 properties
+| name | Description |
+| -------- | --------- |
 | label | Sets the Text for the button |
 | action | Sets the action for the button. Should be a function or several functions and should only include single quotes, not double |
 | icon | The name of one of the icons in http://www.polymer-project.org/components/core-icons/demo.html or one that is included in your project before importing <nb-menu> |
