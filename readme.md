@@ -24,10 +24,10 @@ It creates a menu based on JSON that you give to it.
 
 ##Published Attributes##
 There are 4 published attributes on &lt;nb-menu&gt;
-1. selectedIndex -- This states the initial selected item. Default is null (polymer default)
-2. selectedItem -- The item that is currently selected. Default is -1 (nothing selected)
-3. items -- The JSON of items to construct the menu from. Default is []
-4  adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Useful for use with the <core-drawer-panel>. Default is true
+- selectedIndex -- This states the initial selected item. Default is null (polymer default)
+- selectedItem -- The item that is currently selected. Default is -1 (nothing selected)
+- items -- The JSON of items to construct the menu from. Default is []
+- adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Useful for use with the <core-drawer-panel>. Default is true
 
 ##Adding Content to the Menu##
 if your &lt;nb-menu&gt; has an id of `menu` like this:
