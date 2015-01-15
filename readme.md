@@ -52,6 +52,7 @@ document.getElementById('menu').items = [
                                        ]
 ```
 The JSON can have 5 properties
+
 | name | Description |
 | -------- | --------- |
 | label | Sets the Text for the button |
