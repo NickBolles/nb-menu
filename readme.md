@@ -36,16 +36,16 @@ you can set the content of it like this
 ```JSON
 document.getElementById('menu').items = [
                                            {
-                                               "label": "item 1",
-                                               "action": "alert('hello from item 1')",
+                                                "label": "item 1",
+                                                "action": "alert('hello from item 1')",
                                                 "icon": "arrow-back",
-						 "toggleDrawer": true
+												"toggleDrawer": true,
                                                 "children": [
                                                    {
-                                                       "label": "item 1-1",
-                                                       "action": "console.log('you clicked item 1-1')",
-                                                       "icon": "assignment-ind",
-							"toggleDrawer": true
+                                                        "label": "item 1-1",
+                                                        "action": "console.log('you clicked item 1-1')",
+                                                        "icon": "assignment-ind",
+														"toggleDrawer": true
                                                    }
                                                 ]
                                            }
