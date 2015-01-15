@@ -3,10 +3,13 @@ A polymer component for creating recursive menus from JSON.
 
 ##To Get Started##
 Install with bower:
-`bower install nb-menu`
+`bower install nb-menu
+<br />`
 Import the html file
+<br />
 `<link rel="import" href="bower_components/nb-menu/nb-menu.html">`
 and start using it!
+<br />
 `<nb-menu></nb-menu>`
 <br />
 Look below at *Adding Content to the Menu* for information on how to set the items
