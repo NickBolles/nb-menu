@@ -1,8 +1,8 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/core-menu/core-menu.html">
-<link rel="import" href="../bower_components/core-menu/core-submenu.html">
-<link rel="import" href="../bower_components/core-item/core-item.html">
-<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-menu/core-menu.html">
+<link rel="import" href="../core-menu/core-submenu.html">
+<link rel="import" href="../core-item/core-item.html">
+<link rel="import" href="../core-icons/core-icons.html">
 <script>
   PolymerExpressions.prototype.json = function(object) {
     return JSON.stringify(object);
@@ -15,13 +15,13 @@
       <template repeat="{{items}}" id="test">
           <template if="{{children}}">          
             <template if="{{children.length > 0}}">
-              <core-submenu label="{{ label }} submenu" icon="{{icon}}" data-action="{{action}}" data-toggle-drawer="{{toggleDrawer}}">
+              <core-submenu label="{{ label }}" icon="{{icon}}" data-action="{{action}}" data-toggle-drawer="{{toggleDrawer}}">
                 <template ref="test" repeat="{{children}}"></template>
               </core-submenu> 
             </template>
           </template>
           <template if="{{!children}}">
-            <core-item label="{{ label }} item" icon="{{icon}}" data-action="{{action}}"  data-toggle-drawer="{{toggleDrawer}}">
+            <core-item label="{{ label }}" icon="{{icon}}" data-action="{{action}}"  data-toggle-drawer="{{toggleDrawer}}">
             </core-item>
           </template>
       </template>  
@@ -47,31 +47,38 @@
             reflect: true
         },     
         items: {
-          value: {},
+          value: [],
           reflect: true
-        }               
+        },
+		adjustForDepth: {
+			value: true,
+			reflect: true
+		}
       },
 	  //use the onTap to set the core-drawer-toggle attribute so that the core-drawer-panel will recognize it
 	  //We need to set it on this (nb-menu) because the actual target is inside the shadow dom, and isnt visible to core-drawer-panel
 	  onTap:function onTap(event, details, menu){
-		var currentEle = event.target;
-		var levels = 0;
-		for(var i = 0; i< 1;){
-			var tag = currentEle.tagName;
-			console.log(tag + "  " + currentEle.label);
-			console.log(levels);
-			if (tag == "CORE-MENU" || tag == "NB-MENU"){
-				break;
+		if (this.adjustForDepth){
+			var currentEle = event.target;
+			var levels = 0;
+			for(var i = 0; i< 1;){
+				var tag = currentEle.tagName;
+				console.log(tag + "  " + currentEle.label);
+				console.log(levels);
+				if (tag == "CORE-MENU" || tag == "NB-MENU"){
+					break;
+				}
+				levels++;
+				currentEle = currentEle.parentElement;
 			}
-			levels++;
-			currentEle = currentEle.parentElement;
-		}
-		var cutoff = (event.target.tagName == "CORE-ITEM") ? 3:2;
-		if (levels >cutoff){
-			event.currentTarget.style.marginLeft = "-" +((levels-1)*40) + "px";				
-		}else{
-			if (Math.abs(parseInt(event.currentTarget.style.marginLeft)) > 40){
-				event.currentTarget.style.marginLeft = "0px";
+			console.log(levels);
+			levels = (event.target.tagName == "CORE-ITEM") ? levels-2:levels-1;
+			if (levels >0){
+				event.currentTarget.style.marginLeft = "-" +((levels)*40) + "px";				
+			}else{
+				if (Math.abs(parseInt(event.currentTarget.style.marginLeft)) > 39){
+					event.currentTarget.style.marginLeft = "0px";
+				}
 			}
 		}
 			
