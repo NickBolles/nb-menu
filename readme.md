@@ -2,11 +2,14 @@
 A polymer component for creating recursive menus from JSON.
 
 ##To Get Started##
-After importing polymer import the html file
-`<link rel="import" href="components/nb-menu.html">`
-and start using it
+Install with bower:
+`bower install nb-menu`
+Import the html file
+`<link rel="import" href="bower_components/nb-menu/nb-menu.html">`
+and start using it!
 `<nb-menu></nb-menu>`
-
+<br />
+Look below at *Adding Content to the Menu* for information on how to set the items
 ##Why not use polymers stock [core-menu](https://www.polymer-project.org/docs/elements/core-elements.html#core-menu)?##
 <nb-menu> is smart.
 It creates a menu based on JSON that you give to it.
