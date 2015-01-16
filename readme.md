@@ -1,6 +1,9 @@
 #&lt;NB-Menu&gt;#
 A polymer component for creating recursive menus from JSON.
 
+##Demo##
+http://sup3rb0wlz.github.io/nb-menu
+
 ##To Get Started##
 Install with bower:
 <br />
@@ -59,7 +62,7 @@ The JSON can have 5 properties
 | action | Sets the action for the button. Should be a function or several functions and should only include single quotes, not double |
 | icon | The name of one of the icons in http://www.polymer-project.org/components/core-icons/demo.html or one that is included in your project before importing <nb-menu> |
 | children | An array of items |
-| toggleDrawer | Boolean, whether clicking on this item should toggle the <core-drawer-panel> |
+| toggleDrawer | Boolean, whether clicking on this item should toggle the &lt;core-drawer-panel&gt; |
 
 
 ##Issues or suggestions?##
