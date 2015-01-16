@@ -58,6 +58,7 @@
 	  //use the onTap to set the core-drawer-toggle attribute so that the core-drawer-panel will recognize it
 	  //We need to set it on this (nb-menu) because the actual target is inside the shadow dom, and isnt visible to core-drawer-panel
 	  onTap:function onTap(event, details, menu){
+		//adjust for depth if turned on
 		if (this.adjustForDepth){
 			var currentEle = event.target;
 			var levels = 0;
@@ -80,8 +81,8 @@
 					event.currentTarget.style.marginLeft = "0px";
 				}
 			}
-		}
-			
+		}		
+		//if this element toggles the drawer then toggle the drawer
 		var togglePanel = event.target.dataset.toggleDrawer.toLowerCase();
 		if (togglePanel === "true"){
 			var that = this;
@@ -92,40 +93,27 @@
       },  
       //Declare the "onSelect" Event handler
       onSelect:function onSelect(event, details, menu){
-		
         //if details.isSelected is true the element is being selected
         if (details.isSelected){
-						
           //Set the menu's selectedItem as the element
-          menu.selectedItem = details.item; 
-          
+          menu.selectedItem = details.item;           
           //Do the action that is on the element
           var action = details.item.dataset.action;
-          eval(action);
-          
-          //console.log(" action is " + action);
-          console.log("Selected " + details.item.label);    
-
-		  
+          eval(action);		  
         }
         //The element is being deselected
         else{
           //Do anything that needs to be done when the element is deselected
-          console.log("DeSelected " + details.item.label);
         }        
       },
             
-      //Declare the cunstructor for the element
-      created: function() {
+      //Declare the constructor for the element
+      created: function() {	  
 		this.style.left = "0";
-        //this.selectedItem = null;
-        //this.selectedIndex = -1;
       },
             
       //Declare the callback for when the element is finished initiating
       ready: function(){
-            var that = this;
-            //setTimeout(function(){that.selectedIndex = 0},1000);
       }
             
      //For More events that can be bound to visit https://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
