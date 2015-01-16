@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>nb-menu Example</title>
+
+  <meta name="viewport" 
+  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="bower_components/webcomponentsjs/webcomponents.js">
+  </script>
+	<link rel="import" href="bower_components/polymer/polymer.html">
+	<link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
+	<link rel="import" href="bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">	
+	<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="bower_components/nb-menu/nb-menu.html">
+
+  <style>
+  html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+  }
+  .container {
+    width: 80%;
+    margin: 50px auto;
+  }
+  @media (min-width: 481px) {
+    #tabs {
+      width: 200px;
+    }
+    .container {
+      width: 400px;
+    }
+  }
+  
+  
+  
+  
+  core-scroll-header-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #eee;
+    }
+
+    /* background for toolbar when it is at its full size */
+    core-scroll-header-panel::shadow #headerBg {
+      background-image: url(img/galaxy.jpg);
+    }
+
+    /* background for toolbar when it is condensed */
+    core-scroll-header-panel::shadow #condensedHeaderBg {
+      background-color: rgb(76,35,103);
+	  /*background-image: url(img/galaxy.jpg);*/
+    }
+
+    core-toolbar {
+      color: #f1f1f1;
+      fill: #f1f1f1;
+      background-color: transparent;
+    }
+
+    .title {
+      -webkit-transform-origin: 0;
+      transform-origin: 0;
+      font-size: 40px;
+    }
+
+    .content {
+      padding: 8px;
+    }
+  </style>
+
+</head>
+
+<body unresolved>
+	<core-drawer-panel>
+		<core-scroll-header-panel drawer>
+			<nb-menu selectedIndex="2" id="menu"></nb-menu>
+		</core-scroll-header-panel>
+		<core-scroll-header-panel main flex condenses keepCondensedHeader>
+			<core-toolbar class="tall">
+			<core-icon-button icon="menu" core-drawer-toggle></core-icon-button>
+			  <div class="bottom indent">&lt;nb-menu&gt;</div>
+			</core-toolbar>
+			<content>
+				<h1>Intro</h1>
+				<p>This is a demo of &lt;nb-menu&gt;. This page uses other polymer elements too &lt;core-drawer-panel&gt; and &lt;core-scroll-header-panel&gt;.</p>
+				<p>Try resizing your browser to be less then 450px wide, or until the side bar snaps into a menu. Then click the menu button at the top to open it</p>
+				<p>Also try editing the second text area and clicking the button below to see how to format the json</p>
+				<br />
+				<button style="background-color:purple;color:white;cursor:pointer;" onClick="toggle()">Click here to replace the items in the menu</button>
+				<h1>Here is the current JSON of the menu</h1>
+				<textarea cols="70" rows="30" id="json">
+				</textarea>
+				<h1>Here is what will be put into the menu (Try editing this!)</h1>
+				<textarea cols="70" rows="30" id="oldjson">
+				</textarea>
+				<br /><br /><br /><br /><br />
+				<h1> Here is the javascript for this pages</h1>
+				<textarea cols="100" rows="50" id="codetext"></textarea>
+			</content>
+		</core-scroll-header-panel>
+	</core-drawer-panel>
+
+	
+	<script id="code">
+	//The Function that actually switches the menu
+	function toggle(){
+		//save the oldJSON from the menu		
+			oldJSON = document.getElementById('menu').items;
+		//get the new json from the textareao
+			newJSON = toObj(document.getElementById('oldjson').value);
+		//set the menu's items to the newJSON
+			document.getElementById('menu').items = newJSON;
+		//set the current text area text
+			document.getElementById('json').value = toStr(newJSON, true);
+		//set the old text area text
+			document.getElementById('oldjson').value = toStr(oldJSON, true);
+		}
+	var newJSON;
+	var oldJSON;
+	//create the default for the menu
+	newJSON = [
+                {
+                  "label": "Alert and Deep",
+                  "action": "alert('hello from item 1')",
+                  "icon": "arrow-back",
+				  "toggleDrawer": false,
+                  "children": [
+                    {
+                      "label": "Deep menus",
+                      "action": "console.log('you clicked item 1-1')",
+                      "icon": "assignment-ind",
+					  "toggleDrawer": false,
+                      "children": [
+                        {
+                          "label": "item 1-1-1",
+                          "action": "console.log('you clicked item 1-1-1')",
+                          "icon": "grade",
+						  "toggleDrawer": false,
+                          "children": [
+                            {
+                              "label": "item 1-1-1-1",
+                              "action": "console.log('you clicked item 1-1-1-1')",
+                              "icon": "filter-list",
+							  "toggleDrawer": false,
+							  "children": [
+								{
+								  "label": "item 1-1-1-1-1",
+								  "action": "console.log('item 1-1-1-1-1')",
+								  "icon": "send-money",
+								  "toggleDrawer": false,
+								  "children": [
+									{
+									  "label": "item 1-1-1-1-1-1",
+									  "action": "console.log('item 1-1-1-1-1-1')",
+									  "icon": "send-money",
+									  "toggleDrawer": true
+									}
+								  ]
+								}
+							  ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "item 1-2",
+                      "action": "console.log('you clicked item 1-2')",
+                      "icon": "done-all",
+					  "toggleDrawer": false,
+                      "children": [
+                        {
+                          "label": "item 1-2-1",
+                          "action": "console.log('you clicked item 1-2-1')",
+                          "icon": "folder",
+						  "toggleDrawer": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "item 2",
+                  "action": "console.log('you clicked item 2')",
+                  "icon": "group-work",
+				  "toggleDrawer": false,
+                  "children": [
+                    {
+                      "label": "Select another item",
+                      "action": "this.selectedIndex = 2",
+                      "icon": "send-money",
+					  "toggleDrawer": true
+                    }
+                  ]
+                },
+                {
+                  "label": "item 3",
+                  "action": "console.log('you clicked item 3')",
+                  "icon": "settings-backup-restore",
+				  "toggleDrawer": true
+                },
+                {
+                  "label": "Select another item",
+                  "action": "this.selectedIndex = 1",
+                  "icon": "shopping-cart",
+				  "toggleDrawer": true
+                }
+          ];
+		  //set the menu's items to the default
+	document.getElementById('menu').items = newJSON;
+	//set the text area to the default
+	document.getElementById('json').value = toStr(newJSON, true);
+	
+	//initialize the oldJson to something to toggle between
+	document.getElementById('oldjson').value = toStr([{
+					"label":"New Stuff", 
+					"icon": "settings", 
+					"action": "alert('hello')",
+					"toggleDrawer": false
+				}], true);
+	
+	
+		
+		
+		
+		
+		
+		/* Util functions for stringifying and parsing only when needed*/
+					function toStr(input, formatted) {
+						formatted = (formatted == undefined) ? false:formatted;
+						if (input !== undefined) {
+							var output;
+							if (typeof input !== 'string') {
+								//input is not a string, check to see if its an object, if it is stringify it
+								//console.log('UserData is not an object');
+								if (typeof input == 'object') {
+									if (formatted){
+										output = JSON.stringify(input, null, 3);
+									}else{
+										output = JSON.stringify(input);
+									}
+									return output;
+								} else {
+									//input is not an object, log an error and return nothing
+									return;
+								}
+							} else {
+								return input;
+							}
+						}
+					}
+					function toObj(input){
+						if (input != 'undefined'){
+							var output;
+							if (typeof input !== 'object'){
+								//input is not an object, check to see if its a string, if it is parse it
+								if (typeof input == 'string'){
+									return JSON.parse(input);
+								}else{
+									//input is not a string, log an error and return false
+									return;
+								}
+							}else{
+								//input is allready an object, return it
+								return input;
+							}
+						}
+					}
+					
+		//set the code text text area to this scripts text
+		document.getElementById('codetext').value = document.getElementById("code").innerHTML;
+	</script>
+	
+	
+	
+	
+	
+	</body>
+
+</html>

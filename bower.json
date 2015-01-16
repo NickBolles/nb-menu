@@ -1,0 +1,32 @@
+{
+  "name": "nb-menu example",
+  "version": "1.0.0",
+  "homepage": "http://sup3rb0wlz.github.io/nb-menu",
+  "authors": [
+    "sup3rb0wlz <nickbolles@live.com>"
+  ],
+  "description": "An example for nb-menu",
+  "keywords": [
+    "nb-menu",
+    "nick",
+    "bolles",
+    "sup3rb0wlz"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "core-drawer-panel": "polymer/core-drawer-panel#~0.5.2",
+    "core-header-panel": "polymer/core-header-panel#~0.5.2",
+    "core-menu": "polymer/core-menu#~0.5.2",
+    "core-scroll-header-panel": "polymer/core-scroll-header-panel#~0.5.2",
+    "nb-menu": "~1.0.4",
+    "paper-progress": "polymer/paper-progress#~0.5.2"
+  }
+}
