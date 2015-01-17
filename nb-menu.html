@@ -64,15 +64,12 @@
 			var levels = 0;
 			for(var i = 0; i< 1;){
 				var tag = currentEle.tagName;
-				console.log(tag + "  " + currentEle.label);
-				console.log(levels);
 				if (tag == "CORE-MENU" || tag == "NB-MENU"){
 					break;
 				}
 				levels++;
 				currentEle = currentEle.parentElement;
 			}
-			console.log(levels);
 			levels = (event.target.tagName == "CORE-ITEM") ? levels-2:levels-1;
 			if (levels >0){
 				event.currentTarget.style.marginLeft = "-" +((levels)*40) + "px";				
