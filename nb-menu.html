@@ -12,16 +12,16 @@
 <polymer-element name="nb-menu" >
 	<template>
     <core-menu selected="{{selectedIndex}}" selectedItem="{{selectedItem}}" on-core-select="{{onSelect}}" on-tap="{{onTap}}">
-      <template repeat="{{items}}" id="test">
-          <template if="{{children}}">          
-            <template if="{{children.length > 0}}">
-              <core-submenu label="{{ label }}" icon="{{icon}}" data-action="{{action}}" data-toggle-drawer="{{toggleDrawer}}">
-                <template ref="test" repeat="{{children}}"></template>
+      <template repeat="{{item in items}}" id="test">
+          <template if="{{item.children}}">          
+            <template if="{{item.children.length > 0}}">
+              <core-submenu label="{{item.label}}" icon="{{item.icon}}" data-toggle-drawer="{{item.toggleDrawer}}" data-json="{{item | toStr}}">
+                <template ref="test" repeat="{{item in item.children}}"></template>
               </core-submenu> 
             </template>
           </template>
-          <template if="{{!children}}">
-            <core-item label="{{ label }}" icon="{{icon}}" data-action="{{action}}"  data-toggle-drawer="{{toggleDrawer}}">
+          <template if="{{!item.children}}">
+            <core-item label="{{item.label}}" icon="{{item.icon}}" data-toggle-drawer="{{item.toggleDrawer}}" data-json="{{item | toStr}}">
             </core-item>
           </template>
       </template>  
@@ -29,6 +29,15 @@
   </template>
   
   <script>
+	PolymerExpressions.prototype.toStr = function(input) {
+		if (input != 'undefined'){
+			if (typeof input == 'object') {
+				return JSON.stringify(input);
+			}
+		}
+		return input;
+		
+	};
     //Register the nb-menu element
     Polymer('nb-menu',{
       //Set up the published properties of the element. 
@@ -99,8 +108,26 @@
         else{
 			//Do anything that needs to be done when the element is deselected
         }        
+		details.json = this.toObj(details.item.dataset.json);
 		this.fire('selectionChanged', details);
       },
+	  toStr: function(input){
+		if (input != 'undefined'){
+			if (typeof input == 'object'){
+				return JSON.stringify(value);
+			}
+		}
+		return input
+		
+	  },
+	  toObj: function(input){
+		if (input != 'undefined'){
+			if (typeof input == 'string'){
+				return JSON.parse(input);
+			}
+		}
+		return input
+	  },
             
       //Declare the constructor for the element
       created: function() {	  
