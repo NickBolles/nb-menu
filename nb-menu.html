@@ -83,25 +83,23 @@
 		var togglePanel = event.target.dataset.toggleDrawer.toLowerCase();
 		if (togglePanel === "true"){
 			var that = this;
-				that.setAttribute('core-drawer-toggle', '');
-				//we want to remove the attribute after it has served its purpose
-				setTimeout(function(){that.removeAttribute('core-drawer-toggle')},100);
+			that.setAttribute('core-drawer-toggle', '');
+			//we want to remove the attribute after it has served its purpose
+			setTimeout(function(){that.removeAttribute('core-drawer-toggle')},100);
 		}
       },  
       //Declare the "onSelect" Event handler
       onSelect:function onSelect(event, details, menu){
         //if details.isSelected is true the element is being selected
         if (details.isSelected){
-          //Set the menu's selectedItem as the element
-          menu.selectedItem = details.item;           
-          //Do the action that is on the element
-          var action = details.item.dataset.action;
-          eval(action);		  
+			//Set the menu's selectedItem as the element
+			menu.selectedItem = details.item;         
         }
         //The element is being deselected
         else{
-          //Do anything that needs to be done when the element is deselected
+			//Do anything that needs to be done when the element is deselected
         }        
+		this.fire('selectionChanged', details);
       },
             
       //Declare the constructor for the element
