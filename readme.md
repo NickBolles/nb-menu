@@ -105,7 +105,7 @@ document.getElementById('menu').addEventListener('selectionChanged', function(ev
 		}
 	});
 ```
-#### Separate Actions for Select and Deselect #### 
+#### Separate Actions for Select and Deselect
 Heck if you wanted to you could have separate actions for deselection and selection
 Set the action property of an item to something like
 ```
