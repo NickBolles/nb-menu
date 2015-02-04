@@ -1,3 +1,9 @@
+<!--
+A polymer component for creating recursive menus from JSON.
+
+@element nb-menu
+@demo http://sup3rb0wlz.github.io/nb-menu
+-->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../core-menu/core-menu.html">
 <link rel="import" href="../core-menu/core-submenu.html">
@@ -16,6 +22,9 @@
             core-submenu{
                 width: 110%;
                 margin-left: -5%;
+            }
+            core-item{
+                padding-left: 10px;
             }
         </style>
         <core-menu selected="{{selectedIndex}}" selectedItem="{{selectedItem}}" on-core-select="{{onSelect}}" on-tap="{{onTap}}" fit>
@@ -90,19 +99,22 @@
                     if (levels >0){
                         event.currentTarget.style.marginLeft = "-" +((levels)*20-12) + "px";
                     }else{
-                        if (Math.abs(parseInt(event.currentTarget.style.marginLeft)) > 39){
-                            event.currentTarget.style.marginLeft = "0px";
+                        if (Math.abs(parseInt(event.currentTarget.style.marginLeft)) < 29){
+                            event.currentTarget.style.marginLeft = "12px";
                         }
                     }
                 }
                 //if this element toggles the drawer then toggle the drawer
-                var togglePanel = event.target.dataset.toggleDrawer.toLowerCase();
-                if (togglePanel === "true"){
-                    var that = this;
-                    that.setAttribute('core-drawer-toggle', '');
-                    //we want to remove the attribute after it has served its purpose
-                    setTimeout(function(){that.removeAttribute('core-drawer-toggle')},100);
+                if(event.target.dataset.toggleDrawer){
+                    var togglePanel = event.target.dataset.toggleDrawer.toLowerCase();
+                    if (togglePanel === "true"){
+                        var that = this;
+                        that.setAttribute('core-drawer-toggle', '');
+                        //we want to remove the attribute after it has served its purpose
+                        setTimeout(function(){that.removeAttribute('core-drawer-toggle')},100);
+                    }
                 }
+
             },
             //Declare the "onSelect" Event handler
             onSelect:function onSelect(event, details, menu){
