@@ -1,10 +1,11 @@
 {
   "name": "nb-menu",
-  "version": "0.0.0",
+  "version": "1.0.10",
   "homepage": "https://github.com/sup3rb0wlz/nb-menu",
   "authors": [
     "sup3rb0wlz <nickbolles@live.com>"
   ],
+  "main": "nb-menu.html",
   "description": "A smart, recursive menu web-component based on polymers <core-menu> that can be created from a chunk of json.",
   "keywords": [
     "Polymer",
