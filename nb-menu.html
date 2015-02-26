@@ -45,15 +45,7 @@ A polymer component for creating recursive menus from JSON.
     </template>
 
     <script>
-        PolymerExpressions.prototype.toStr = function(input) {
-            if (input != 'undefined'){
-                if (typeof input == 'object') {
-                    return JSON.stringify(input);
-                }
-            }
-            return input;
-
-        };
+        
         //Register the nb-menu element
         Polymer('nb-menu',{
             //Set up the published properties of the element.
@@ -131,14 +123,13 @@ A polymer component for creating recursive menus from JSON.
                 this.fire('selectionChanged', details);
             },
             toStr: function(input){
-                if (input != 'undefined'){
-                    if (typeof input == 'object'){
-                        return JSON.stringify(value);
-                    }
+			if (input != 'undefined'){
+                if (typeof input == 'object') {
+                    return JSON.stringify(input);
                 }
-                return input
-
-            },
+            }
+            return input;
+			},
             toObj: function(input){
                 if (input != 'undefined'){
                     if (typeof input == 'string'){
