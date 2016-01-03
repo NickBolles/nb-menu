@@ -2,7 +2,7 @@
 A polymer component for creating recursive menus from JSON.
 
 ##Demo##
-http://sup3rb0wlz.github.io/nb-menu
+http://nickbolles.github.io/nb-menu
 
 ##To Get Started##
 Install with bower:
@@ -18,12 +18,13 @@ and start using it!
 `<nb-menu></nb-menu>`
 <br />
 Look below at *Adding Content to the Menu* for information on how to set the items
+
 ##Why not use polymers stock [core-menu](https://www.polymer-project.org/docs/elements/core-elements.html#core-menu)?##
 &lt;nb-menu&gt; is smart.
 It creates a menu based on JSON that you give to it.
-&lt;nb-menu&gt; doesnt just create recursive menus with little effort though...
-- It works great with [core-drawer-panel](https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel) (See `toggleDrawer` in "JSON format" below)
-- It automatically scrolls over when the depth of submenus gets to deep. This can be disabled (see `Published Attributes` below)
+&lt;nb-menu&gt; doesn't just create recursive menus with little effort though...
+- It works great with [core-drawer-panel](https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel) (See `toggleDrawer` in [`JSON Format`](#Published-Attributes) below)
+- It automatically scrolls over when the depth of submenus gets to deep. This can be disabled with the `adjustForDepth` attribute (see [`Published Attributes`](#Published-Attributes) below)
 
 ##Published Attributes##
 There are 4 published attributes on &lt;nb-menu&gt;
@@ -31,6 +32,7 @@ There are 4 published attributes on &lt;nb-menu&gt;
 - selectedItem -- The item that is currently selected. Default is -1 (nothing selected)
 - items -- The JSON of items to construct the menu from. Default is []
 - adjustForDepth -- Adjusts the menu when the depth is more then 2 so that the items stay in view. Useful for use with the <core-drawer-panel>. Default is true
+
 ##Adding Content to the Menu##
 if your &lt;nb-menu&gt; has an id of `menu` like this:
 `<nb-menu id="menu"></nb-menu>`
@@ -53,6 +55,8 @@ document.getElementById('menu').items = [
                                            }
                                        ]
 ```
+
+##JSON Format##
 The JSON can have 5 properties
 
 | name | Description |
@@ -62,7 +66,7 @@ The JSON can have 5 properties
 | children | An array of items |
 | toggleDrawer | Boolean, whether clicking on this item should toggle the &lt;core-drawer-panel&gt; |
 | action | A typical way to store the action of the button. This is just for use in the event handler |
-| <Any-custom-property> | Any custom property in the JSON will be accessable in the event listener for the item |
+| <Any-custom-property> | Any custom property in the JSON will be accessible in the event listener for the item |
 
 ##Handling Events##
 The Menu emits a `selectionChanged' whenever the selection changes
@@ -90,18 +94,18 @@ document.getElementById('menu').addEventListener('selectionChanged', function(ev
 			console.log(item.label + " selected. Action is " + item.action)
 			//Do the action
 			eval(item.action)
-						
+
 			//Or......if you are using angular this is useful, In a service you can do something like...
 			if ($scope[action]){
 				$scope[action]();
 			}
-			
+
 		}
 		else{
 			console.log(item.label + " De-selected. Action is " + item.action)
 			//Do the action
 			eval(item.action);
-			
+
 		}
 	});
 ```
@@ -113,7 +117,7 @@ Set the action property of an item to something like
 	"select":"alert('Item 1 Selected')",
 	"deselect": "alert('Item 1 Deselected')"
 	}
-                  
+
 ```
 Then check to see if the action property is an object, if it is do the respective action
 ```
@@ -125,7 +129,7 @@ if(event.detail.isSelected){
 	}else{
 		eval(item.action)
 	}
-	
+
 }
 else{
 	console.log(item.label + " De-selected. Action is " + item.action)
@@ -138,4 +142,4 @@ else{
 }
 ```
 ##Issues or suggestions?##
-Create an issue on github or email me at nickbolles@live.com
+Create an issue on github or email me at me@nickbolles.com
