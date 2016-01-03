@@ -23,8 +23,8 @@ Look below at *Adding Content to the Menu* for information on how to set the ite
 &lt;nb-menu&gt; is smart.
 It creates a menu based on JSON that you give to it.
 &lt;nb-menu&gt; doesn't just create recursive menus with little effort though...
-- It works great with [core-drawer-panel](https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel) (See `toggleDrawer` in [`JSON Format`](#Published-Attributes) below)
-- It automatically scrolls over when the depth of submenus gets to deep. This can be disabled with the `adjustForDepth` attribute (see [`Published Attributes`](#Published-Attributes) below)
+- It works great with [core-drawer-panel](https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel) (See `toggleDrawer` in [`JSON Format`](#json-format) below)
+- It automatically scrolls over when the depth of submenus gets to deep. This can be disabled with the `adjustForDepth` attribute (see [`Published Attributes`](#published-attributes) below)
 
 ##Published Attributes##
 There are 4 published attributes on &lt;nb-menu&gt;
